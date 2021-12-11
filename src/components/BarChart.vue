@@ -1,7 +1,6 @@
 <script>
 import { Bar } from "vue-chartjs";
-import { ecoutes, ecoutesLegale, attiranceTaux } from "../utils";
-console.log(attiranceTaux());
+import { ecoutes, ecoutesLegale } from "../utils";
 export default {
   extends: Bar,
   mounted() {

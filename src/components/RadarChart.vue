@@ -7,9 +7,15 @@ export default {
     affinites: Object,
     name: String,
   },
-  mounted() {
-    this.renderChart(
-      {
+  data() {
+    return {
+      chartData: null,
+      options: null,
+    };
+  },
+  methods: {
+    renderThisChart() {
+      this.chartData = {
         labels: Object.keys(this.affinites),
         datasets: [
           {
@@ -23,9 +29,21 @@ export default {
             data: Object.values(this.affinites),
           },
         ],
-      },
-      { responsive: true, maintainAspectRatio: false }
-    );
+      };
+      this.renderChart(this.chartData, {
+        responsive: true,
+        maintainAspectRatio: false,
+      });
+    },
+  },
+  watch: {
+    affinites: function() {
+      this.$data._chart.destroy();
+      this.renderThisChart();
+    },
+  },
+  mounted() {
+    this.renderThisChart();
   },
 };
 </script>

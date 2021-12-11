@@ -80,6 +80,9 @@ function attirances() {
     if (element.styles.jazz) {
       stylesCountAdd(attrait.jazz, element.styles);
     }
+    if (element.styles.monde) {
+      stylesCountAdd(attrait.monde, element.styles);
+    }
     if (element.styles.pop_rock) {
       stylesCountAdd(attrait.pop_rock, element.styles);
     }
@@ -106,7 +109,6 @@ function attiranceTaux() {
   let attrait = attirances();
   let keys = Object.keys(attrait);
   keys.forEach(function(key1) {
-    console.log(key1);
     let total = attrait[key1][key1];
     keys.forEach(function(key2) {
       attrait[key1][key2] = (attrait[key1][key2] * 100) / total;

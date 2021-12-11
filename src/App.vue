@@ -1,20 +1,21 @@
 <template>
   <div id="app">
     <BarChart />
+    <TauxTelechargement />
     <Affinites />
   </div>
 </template>
 
 <script>
-import PieChart from "./components/PieChart.vue";
 import BarChart from "./components/BarChart.vue";
 import Affinites from "./components/Affinites.vue";
+import TauxTelechargement from "./components/TauxTelechargement.vue";
 
 export default {
   name: "App",
   components: {
     Affinites,
-    PieChart,
+    TauxTelechargement,
     BarChart,
   },
 };

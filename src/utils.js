@@ -1,18 +1,3 @@
-function stylesCountAdd(stylesCount, styles) {
-  stylesCount.autre += styles.autre;
-  stylesCount.classique += styles.classique;
-  stylesCount.dance += styles.dance;
-  stylesCount.electro += styles.electro;
-  stylesCount.jazz += styles.jazz;
-  stylesCount.monde += styles.monde;
-  stylesCount.pop_rock += styles.pop_rock;
-  stylesCount.rap += styles.rap;
-  stylesCount.reggae += styles.reggae;
-  stylesCount.rnb += styles.rnb;
-  stylesCount.soul += styles.soul;
-  stylesCount.variete_fr += styles.variete_fr;
-}
-
 function StylesCount() {
   this.autre = 0;
   this.classique = 0;
@@ -26,6 +11,36 @@ function StylesCount() {
   this.rnb = 0;
   this.soul = 0;
   this.variete_fr = 0;
+}
+
+function StylesCountCount() {
+    this.autre= new StylesCount();
+    this.classique= new StylesCount();
+    this.dance= new StylesCount();
+    this.electro= new StylesCount();
+    this.jazz= new StylesCount();
+    this.monde= new StylesCount();
+    this.pop_rock= new StylesCount();
+    this.rap= new StylesCount();
+    this.reggae= new StylesCount();
+    this.rnb= new StylesCount();
+    this.soul= new StylesCount();
+    this.variete_fr= new StylesCount();
+}
+
+function stylesCountAdd(stylesCount, styles) {
+  stylesCount.autre += styles.autre;
+  stylesCount.classique += styles.classique;
+  stylesCount.dance += styles.dance;
+  stylesCount.electro += styles.electro;
+  stylesCount.jazz += styles.jazz;
+  stylesCount.monde += styles.monde;
+  stylesCount.pop_rock += styles.pop_rock;
+  stylesCount.rap += styles.rap;
+  stylesCount.reggae += styles.reggae;
+  stylesCount.rnb += styles.rnb;
+  stylesCount.soul += styles.soul;
+  stylesCount.variete_fr += styles.variete_fr;
 }
 
 function ecoutes() {
@@ -48,22 +63,29 @@ function ecoutesLegale(niveauLegal) {
   return stylesCount;
 }
 
+function ecoutesLegaleTaux(){
+  let total = ecoutes();
+  let keys = Object.keys(total);
+  let legal1 = ecoutesLegale(1);
+  let legal2 = ecoutesLegale(2);
+  let legal3 = ecoutesLegale(3);
+  let legal4 = ecoutesLegale(4);
+  let Tauxlegal= {};
+  keys.forEach(function(key) { // pour chaque genre de musique
+    Tauxlegal[key] = {}
+    Tauxlegal[key].legal1 = legal1[key] * 100 / total[key];
+    Tauxlegal[key].legal2 = legal2[key] * 100 / total[key];
+    Tauxlegal[key].legal3 = legal3[key] * 100 / total[key];
+    Tauxlegal[key].legal4 = legal4[key] * 100 / total[key];
+    Tauxlegal[key].legal0 = 100 - Tauxlegal[key].legal1 - Tauxlegal[key].legal2 - Tauxlegal[key].legal3 - Tauxlegal[key].legal4;
+  });
+  console.log(Tauxlegal);
+  return Tauxlegal;
+}
+
 function attirances() {
   let json = require("./data/data.json");
-  let attrait = {
-    autre: new StylesCount(),
-    classique: new StylesCount(),
-    dance: new StylesCount(),
-    electro: new StylesCount(),
-    jazz: new StylesCount(),
-    monde: new StylesCount(),
-    pop_rock: new StylesCount(),
-    rap: new StylesCount(),
-    reggae: new StylesCount(),
-    rnb: new StylesCount(),
-    soul: new StylesCount(),
-    variete_fr: new StylesCount(),
-  };
+  let attrait = new StylesCountCount();
   json.values.forEach(function(element) {
     if (element.styles.autre) {
       stylesCountAdd(attrait.autre, element.styles);
@@ -118,4 +140,4 @@ function attiranceTaux() {
   return attrait;
 }
 
-export { ecoutes, ecoutesLegale, attiranceTaux };
+export { ecoutes, ecoutesLegale, attiranceTaux, ecoutesLegaleTaux };
